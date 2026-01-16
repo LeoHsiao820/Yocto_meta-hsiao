@@ -27,7 +27,12 @@ static int gpioled_probe(struct platform_device *pdev)
 {
     u32 out_value;
 
-    
+    dev_info(&pdev->dev, "%s %d: gpioled platform driver probed successfully\n", __func__, __LINE__);
+    of_property_read_u32(pdev->dev.of_node, "test-val", &out_value);
+
+    gpioled.gpiod = devm_gpiod_get_optional(&pdev->dev, "led", GPIOD_OUT_LOW);
+
+    gpiod_set_value(gpioled.gpiod, 1);
 
 
     return 0;
@@ -35,7 +40,8 @@ static int gpioled_probe(struct platform_device *pdev)
 
 static void gpioled_remove(struct platform_device *pdev)
 {
-    
+    dev_info(&pdev->dev, "%s %d\r\n", __func__, __LINE__);
+	gpiod_set_value(gpioled.gpiod, 0);
 }
 
 /* Match table for device tree binding */
