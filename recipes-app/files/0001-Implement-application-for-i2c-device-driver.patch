@@ -1,0 +1,248 @@
+From 808f39c21fda7668b1e606b184e439534325245b Mon Sep 17 00:00:00 2001
+From: Leo <littlepig602@gmail.com>
+Date: Sat, 28 Feb 2026 16:43:44 +0800
+Subject: [PATCH] Implement application for i2c device driver
+
+---
+ 22_i2c_at24c_app   | Bin 0 -> 74336 bytes
+ 22_i2c_at24c_app.c | 112 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 112 insertions(+)
+ create mode 100755 22_i2c_at24c_app
+
+diff --git a/22_i2c_at24c_app b/22_i2c_at24c_app
+new file mode 100755
+index 0000000000000000000000000000000000000000..1ec5acc822ca450fbc12829b57b22db08e64eac9
+GIT binary patch
+literal 74336
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/22_i2c_at24c_app.c b/22_i2c_at24c_app.c
+index e69de29..855754b 100644
+--- a/22_i2c_at24c_app.c
++++ b/22_i2c_at24c_app.c
+@@ -0,0 +1,112 @@
++#include <stdio.h>
++#include <stdlib.h> 
++#include <string.h>
++#include "fcntl.h"
++#include "unistd.h"
++
++/**
++ * AT24C256 EEPROM 測試程式
++ * * 用法: ./at24_test /dev/at24c256
++ * * 此程式展示了典型的 Linux 檔案操作流程：
++ * 1. open()  -> 呼叫驅動的 at24_open
++ * 2. write() -> 呼叫驅動的 at24_eeprom_write (處理分頁與 16-bit 地址)
++ * 3. lseek() -> 呼叫驅動的 at24_eeprom_llseek (重設讀取指標)
++ * 4. read()  -> 呼叫驅動的 at24_eeprom_read
++ */
++
++int main(int argc, char *argv[])
++{
++    int fd;
++    int ret;
++    char *filename;
++    /* 測試寫入的字串 */
++    char write_data[] = "i.MX93_AT24C256_TEST";
++    char read_buf[64] = {0};
++
++    printf("--- AT24C256 eeprom test ---\n");
++
++    /* 檢查命令列參數，確保使用者有輸入裝置路徑 */
++    if (argc != 2) {
++        printf("Usage: %s <device_path>\n", argv[0]);
++        return 1;
++    }
++
++    filename = argv[1];
++    
++    /* * 0. 打開裝置檔案
++     * O_RDWR: 以可讀可寫模式開啟。
++     * 成功後會回傳檔案描述符 (File Descriptor, fd)。
++     */
++    fd = open(filename, O_RDWR);
++    if (fd < 0) {
++        printf("Error: Cannot open %s. Check permissions or if driver is loaded.\n", filename);
++        return 1;
++    }
++
++    /* * 1. 寫入測試
++     * 驅動程式內部已經封裝了 16-bit 地址處理與 Page Write 邏輯，
++     * 所以應用層只需像寫入一般檔案一樣傳送純資料。
++     */
++    printf("Writing data: %s\n", write_data);
++    if (write(fd, write_data, strlen(write_data)) < 0) {
++        perror("Write failed");
++    }
++
++    /* * 重要提示：EEPROM 硬體完成物理燒錄需要時間 (Write Cycle Time)。
++     * 雖然驅動內部已有延遲，但在應用層多加一點緩衝可確保讀取前資料已固化。
++     */
++    usleep(10000); 
++
++    /* * 2. 讀取測試
++     * 在 read() 之前，必須先將讀取緩衝區清空。
++     */
++    memset(read_buf, 0, sizeof(read_buf));
++
++    /* * 定位指標 (lseek)
++     * 因為之前的 write() 操作已經讓檔案指標 (f_pos) 移到了資料末端，
++     * 若要從頭讀取，必須使用 lseek 將指標指回 0 (SEEK_SET)。
++     */
++    lseek(fd, 0, SEEK_SET);
++
++    printf("Reading data...\n");
++
++    /* 從 EEPROM 讀取資料至 read_buf */
++    ret = read(fd, read_buf, sizeof(read_buf));
++
++    if (ret < 0) {
++        perror("Read failed");
++        close(fd);
++        return -1;
++    } 
++
++    /* * 資料清理邏輯：
++     * 1. 加上字串終結符 \0。
++     * 2. EEPROM 出廠或被抹除後通常值為 0xFF，若遇到 0xFF 表示到達資料邊界。
++     */
++    read_buf[ret] = '\0'; 
++    for(int i = 0; i < ret; i++) {
++        if((unsigned char)read_buf[i] == 0xFF) {
++            read_buf[i] = '\0';
++            break;
++        }
++    }
++    
++    printf("Read data back: [%s]\n", read_buf);
++
++    /* * 3. 驗證結果
++     * 比較寫入與讀回的字串是否完全一致。
++     */
++    if (strncmp(write_data, read_buf, strlen(write_data)) == 0) {
++        printf(">> Validation passed! Data integrity confirmed.\n");
++    } else {
++        printf(">> Validation failed!\n");
++        printf("   Expected: [%s]\n", write_data);
++        printf("   Received: [%s]\n", read_buf);
++        printf(">> Please check I2C driver logic (Address bytes, Page Write boundaries).\n");
++    }
++    
++    /* 釋放資源 */
++    close(fd);
++
++    return 0;
++}
+\ No newline at end of file

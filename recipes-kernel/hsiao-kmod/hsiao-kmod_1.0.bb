@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 inherit module
 
 SRC_URI = "file://Makefile \
-           file://19_keyinput.c \
+           file://22_i2c_at24.c \
            file://COPYING \
-           file://0001-Implement-input-key-driver.patch \
+           file://0001-Implement-i2c-device-driver.patch \
            "
 
 S = "${WORKDIR}/sources"

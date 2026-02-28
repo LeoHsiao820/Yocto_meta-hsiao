@@ -1,0 +1,112 @@
+From 283109d3049bfe27bc7d4abf46b44424b64c5363 Mon Sep 17 00:00:00 2001
+From: Leo <littlepig602@gmail.com>
+Date: Sat, 28 Feb 2026 16:27:33 +0800
+Subject: [PATCH] Implement i2c device driver with ch22
+
+---
+ .../boot/dts/freescale/imx93-11x11-evk.dts    | 64 +++++++++++--------
+ 1 file changed, 39 insertions(+), 25 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx93-11x11-evk.dts b/arch/arm64/boot/dts/freescale/imx93-11x11-evk.dts
+index 271ccacc7b33..b13c0c9d5bd9 100644
+--- a/arch/arm64/boot/dts/freescale/imx93-11x11-evk.dts
++++ b/arch/arm64/boot/dts/freescale/imx93-11x11-evk.dts
+@@ -275,6 +275,23 @@ cpu {
+ 			};
+ 		};
+ 	};
++
++	/* leo test */
++	gpioled {
++		status = "okay";
++		compatible = "hsiao,gpioleddev";
++		pinctrl-0 = <&pinctrl_gpio>;
++		test-val = <123>;
++		led-gpios = <&gpio2 12 GPIO_ACTIVE_HIGH>;
++	};
++
++	input_key {
++		status = "okay";
++		compatible = "hsiao,inputkey";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_key>;
++		key0-gpios = <&gpio2 23 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &adc1 {
+@@ -531,6 +548,15 @@ ldo5: LDO5 {
+ 		};
+ 	};
+ 
++	/* Leo test */
++	at24c256: eeprom@50 {
++		compatible = "hsiao,at24c256";
++		reg = <0x50>;
++		pagesize = <64>;
++		size = <32768>;
++		address-width = <16>;
++	};
++
+ 	adp5585: io-expander@34 {
+ 		compatible = "adi,adp5585-00", "adi,adp5585";
+ 		reg = <0x34>;
+@@ -829,17 +855,6 @@ &wdog3 {
+ 	status = "okay";
+ };
+ 
+-&xcvr {
+-	pinctrl-names = "default", "sleep";
+-	pinctrl-0 = <&pinctrl_spdif>;
+-	pinctrl-1 = <&pinctrl_spdif_sleep>;
+-	assigned-clocks = <&clk IMX93_CLK_SPDIF>,
+-			 <&clk IMX93_CLK_AUDIO_XCVR>;
+-	assigned-clock-parents = <&clk IMX93_CLK_AUDIO_PLL>,
+-			 <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-	assigned-clock-rates = <12288000>, <200000000>;
+-	status = "okay";
+-};
+ 
+ &iomuxc {
+ 	pinctrl_eqos: eqosgrp {
+@@ -1066,20 +1081,6 @@ MX93_PAD_SD2_RESET_B__GPIO3_IO07	0x31e
+ 		>;
+ 	};
+ 
+-	pinctrl_spdif: spdifgrp {
+-		fsl,pins = <
+-			MX93_PAD_GPIO_IO22__SPDIF_IN		0x3fe
+-			MX93_PAD_GPIO_IO23__SPDIF_OUT		0x3fe
+-		>;
+-	};
+-
+-	pinctrl_spdif_sleep: spdifsleepgrp {
+-		fsl,pins = <
+-			MX93_PAD_GPIO_IO22__GPIO2_IO22		0x31e
+-			MX93_PAD_GPIO_IO23__GPIO2_IO23		0x31e
+-		>;
+-	};
+-
+ 	pinctrl_usdhc2_gpio: usdhc2gpiogrp {
+ 		fsl,pins = <
+ 			MX93_PAD_SD2_CD_B__GPIO3_IO00		0x31e
+@@ -1215,6 +1216,19 @@ MX93_PAD_GPIO_IO19__GPIO2_IO19			0x51e
+ 			MX93_PAD_GPIO_IO20__GPIO2_IO20			0x51e
+ 		>;
+ 	};
++
++	/* Leo test */
++	pinctrl_gpio: gpioledgrp {
++		fsl,pins = <
++			MX93_PAD_GPIO_IO12__GPIO2_IO12			0x3fe /* LED0 */
++		>; 
++	};
++
++	pinctrl_key: key_0 {
++		fsl,pins = <
++			MX93_PAD_GPIO_IO23__GPIO2_IO23			0x31e /* KEY0 */
++		>; 
++	};
+ };
+ 
+ &epxp {

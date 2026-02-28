@@ -1,4 +1,4 @@
-obj-m := 16_gpioled_platform.o
+obj-m := 22_i2c_at24.o
 
 SRC := $(shell pwd)
 
