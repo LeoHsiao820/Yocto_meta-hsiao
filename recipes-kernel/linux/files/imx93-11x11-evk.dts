@@ -285,6 +285,17 @@
 		led-gpios = <&gpio2 12 GPIO_ACTIVE_HIGH>;
 	};
 
+	&lpuart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
+	clocks = <&clk IMX93_CLK_LPUART3_GATE>;
+	status = "okay";
+
+	compatible = "hsiao,lpuart";
+	};
+
+	/* leo test */
+
 	input_key {
 		status = "okay";
 		compatible = "hsiao,inputkey";
@@ -1214,6 +1225,15 @@
 			MX93_PAD_GPIO_IO12__GPIO2_IO12			0x3fe /* LED0 */
 		>; 
 	};
+
+	pinctrl_uart3: uart3grp {
+		fsl,pins = <
+			MX93_PAD_GPIO_IO14__LPUART3_TX			0x31e
+			MX93_PAD_GPIO_IO15__LPUART3_RX			0x31e
+		>;
+	};
+
+	/* leo test */
 
 	pinctrl_key: key_0 {
 		fsl,pins = <
