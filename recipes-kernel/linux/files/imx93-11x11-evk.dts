@@ -276,7 +276,7 @@
 		};
 	};
 
-	/* leo test */
+	/* --- leo test START---*/
 	gpioled {
 		status = "okay";
 		compatible = "hsiao,gpioleddev";
@@ -286,15 +286,19 @@
 	};
 
 	&lpuart3 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart3>;
-	clocks = <&clk IMX93_CLK_LPUART3_GATE>;
-	status = "okay";
+    compatible = "hsiao,lpuart"; 
+    
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_uart3>;
+    
+    clocks = <&clk IMX93_CLK_LPUART3_GATE>;
+	clock-names = "ipg";
 
-	compatible = "hsiao,lpuart";
+	interrupts = <GIC_SPI 68 IRQ_TYPE_LEVEL_HIGH>;
+
+    
+    status = "okay";
 	};
-
-	/* leo test */
 
 	input_key {
 		status = "okay";
@@ -303,6 +307,8 @@
 		pinctrl-0 = <&pinctrl_key>;
 		key0-gpios = <&gpio2 23 GPIO_ACTIVE_LOW>;
 	};
+
+	/* --- leo test END---*/
 };
 
 &adc1 {
@@ -1219,7 +1225,7 @@
 		>;
 	};
 
-	/* Leo test */
+	/* --- leo test START---*/
 	pinctrl_gpio: gpioledgrp {
 		fsl,pins = <
 			MX93_PAD_GPIO_IO12__GPIO2_IO12			0x3fe /* LED0 */
@@ -1233,13 +1239,12 @@
 		>;
 	};
 
-	/* leo test */
-
 	pinctrl_key: key_0 {
 		fsl,pins = <
 			MX93_PAD_GPIO_IO23__GPIO2_IO23			0x31e /* KEY0 */
 		>; 
 	};
+	/* --- leo test END---*/
 };
 
 &epxp {
