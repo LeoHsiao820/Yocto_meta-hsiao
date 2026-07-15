@@ -1,4 +1,4 @@
-obj-m := 22_i2c_at24.o
+obj-m := lpuart.o
 
 SRC := $(shell pwd)
 

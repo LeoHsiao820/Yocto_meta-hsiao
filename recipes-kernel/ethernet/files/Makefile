@@ -1,4 +1,4 @@
-obj-m := net_event_monitor.o
+obj-m := net_watchdog.o
 
 SRC := $(shell pwd)
 
